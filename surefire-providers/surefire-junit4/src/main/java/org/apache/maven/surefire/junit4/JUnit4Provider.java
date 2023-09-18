@@ -99,6 +99,8 @@ public class JUnit4Provider
 
     private final int rerunFailingTestsCount;
 
+    private final int rerunTestsCount;
+
     private final CommandChainReader commandsReader;
 
     private TestsToRun testsToRun;
@@ -116,6 +118,7 @@ public class JUnit4Provider
         TestRequest testRequest = bootParams.getTestRequest();
         testResolver = testRequest.getTestListResolver();
         rerunFailingTestsCount = testRequest.getRerunFailingTestsCount();
+        rerunTestsCount = testRequest.getRerunTestsCount();
     }
 
     @Override
@@ -167,6 +170,7 @@ public class JUnit4Provider
                 {
                     executeTestSet( testToRun, reporter, notifier, listener );
                 }
+                reporter.allTestSetCompleted();
             }
             finally
             {
@@ -202,6 +206,11 @@ public class JUnit4Provider
     private boolean isRerunFailingTests()
     {
         return rerunFailingTestsCount > 0;
+    }
+
+    private boolean isRerunTests()
+    {
+        return rerunTestsCount > 0;
     }
 
     private boolean isFailFast()
@@ -371,6 +380,17 @@ public class JUnit4Provider
         if ( !isAbstract( classModifiers ) && !isInterface( classModifiers ) )
         {
             Request request = aClass( testClass );
+            if ( runOrderComparator != null )
+            {
+                request = request.sortWith( new Comparator<Description>()
+                {
+                    @Override
+                    public int compare( Description o1, Description o2 )
+                    {
+                        return runOrderComparator.compare( o1.toString(), o2.toString() );
+                    }
+                } );
+            }
             if ( filter != null )
             {
                 request = request.filterWith( filter );

@@ -399,6 +399,12 @@ public class MojoMocklessTest
         }
 
         @Override
+        protected int getRerunTestsCount()
+        {
+            return 0;
+        }
+
+        @Override
         public boolean isSkipTests()
         {
             return false;

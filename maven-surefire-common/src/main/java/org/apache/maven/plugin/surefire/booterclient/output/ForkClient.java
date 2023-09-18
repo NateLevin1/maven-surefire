@@ -98,6 +98,7 @@ public final class ForkClient
         this.forkNumber = forkNumber;
         notifier.setTestSetStartingListener( new TestSetStartingListener() );
         notifier.setTestSetCompletedListener( new TestSetCompletedListener() );
+        notifier.setAllTestSetCompletedListener( new AllTestSetCompletedListener() );
         notifier.setTestStartingListener( new TestStartingListener() );
         notifier.setTestSucceededListener( new TestSucceededListener() );
         notifier.setTestFailedListener( new TestFailedListener() );
@@ -145,6 +146,16 @@ public final class ForkClient
                 reportEntry.getGroup(), reportEntry.getStackTraceWriter(), reportEntry.getElapsed(),
                 reportEntry.getMessage(), getTestVmSystemProperties() );
             getTestSetReporter().testSetCompleted( entry );
+        }
+    }
+
+    private final class AllTestSetCompletedListener
+        implements ForkedProcessEventListener
+    {
+        public void handle()
+        {
+            testsInProgress.clear();
+            getTestSetReporter().allTestSetCompleted();
         }
     }
 

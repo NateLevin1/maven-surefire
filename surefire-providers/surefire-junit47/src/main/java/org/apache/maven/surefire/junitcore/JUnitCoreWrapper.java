@@ -129,6 +129,18 @@ final class JUnitCoreWrapper
         throws TestSetFailedException
     {
         Request req = classes( computer, classesToRun );
+        final Comparator<String> testOrderComparator = runOrderCalculator.comparatorForTestMethods();
+        if ( testOrderComparator != null )
+        {
+            req = req.sortWith( new Comparator<Description>()
+            {
+                @Override
+                public int compare( Description o1, Description o2 )
+                {
+                    return testOrderComparator.compare( o1.toString(), o2.toString() );
+                }
+            } );
+        }
         if ( filter != null )
         {
             req = new FilteringRequest( req, filter );

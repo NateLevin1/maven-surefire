@@ -232,6 +232,11 @@ public class TestSetRunListener
         clearCapture();
     }
 
+    public void allTestSetCompleted()
+    {
+        simpleXMLReporter.allTestSetCompleted();
+    }
+
     // ----------------------------------------------------------------------
     // Test callback methods:
     // ----------------------------------------------------------------------

@@ -136,6 +136,11 @@ public class JUnitTestSetTest
         private List<ReportEntry> succeededTests = new ArrayList<>();
 
         @Override
+        public void allTestSetCompleted()
+        {
+        }
+
+        @Override
         public void testSetStarting( TestSetReportEntry report )
         {
         }

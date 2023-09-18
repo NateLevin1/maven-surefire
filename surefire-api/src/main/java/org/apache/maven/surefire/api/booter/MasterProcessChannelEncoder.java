@@ -42,6 +42,7 @@ public interface MasterProcessChannelEncoder
      */
     void onJvmExit();
 
+
     /**
      * The test set has started.
      *

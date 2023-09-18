@@ -1,4 +1,4 @@
-package org.apache.maven.plugin.surefire.report;
+package org.apache.maven.surefire.api.event;
 
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
@@ -19,35 +19,59 @@ package org.apache.maven.plugin.surefire.report;
  * under the License.
  */
 
+import static org.apache.maven.surefire.api.booter.ForkedProcessEventType.BOOTERCODE_ALLTESTSET_COMPLETED;
+
 /**
- * FileReporter doing nothing rather than using null.
+ * The control event of bye.
  *
- * @author <a href="mailto:britter@apache.org">Benedikt Ritter</a>
- * @since 2.20
+ * @since 3.0.0-M5
  */
-class NullStatelessXmlReporter
-    extends StatelessXmlReporter
+public final class AllTestsetCompletedEvent extends Event
 {
-
-    static final NullStatelessXmlReporter INSTANCE = new NullStatelessXmlReporter();
-
-    private NullStatelessXmlReporter()
+    public AllTestsetCompletedEvent ()
     {
-        super( null, null, false, 0, null, null, null, false, false, false, false, 0 );
+        super( BOOTERCODE_ALLTESTSET_COMPLETED );
     }
 
     @Override
-    public void testSetCompleted( WrappedReportEntry testSetReportEntry, TestSetStats testSetStats )
+    public boolean isControlCategory()
     {
+        return true;
     }
 
     @Override
-    public void allTestSetCompleted()
+    public boolean isConsoleCategory()
     {
+        return false;
     }
 
     @Override
-    public void cleanTestHistoryMap()
+    public boolean isConsoleErrorCategory()
     {
+        return false;
+    }
+
+    @Override
+    public boolean isStandardStreamCategory()
+    {
+        return false;
+    }
+
+    @Override
+    public boolean isSysPropCategory()
+    {
+        return false;
+    }
+
+    @Override
+    public boolean isTestCategory()
+    {
+        return false;
+    }
+
+    @Override
+    public boolean isJvmExitError()
+    {
+        return false;
     }
 }

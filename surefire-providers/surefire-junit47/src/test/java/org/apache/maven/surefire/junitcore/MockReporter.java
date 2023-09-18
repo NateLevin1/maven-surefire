@@ -63,6 +63,11 @@ final class MockReporter
     }
 
     @Override
+    public void allTestSetCompleted()
+    {
+    }
+
+    @Override
     public void testSetStarting( TestSetReportEntry report )
     {
         events.add( SET_STARTED );

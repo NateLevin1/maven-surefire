@@ -57,6 +57,7 @@ import static org.apache.maven.surefire.api.booter.ForkedProcessEventType.BOOTER
 import static org.apache.maven.surefire.api.booter.ForkedProcessEventType.BOOTERCODE_STOP_ON_NEXT_TEST;
 import static org.apache.maven.surefire.api.booter.ForkedProcessEventType.BOOTERCODE_SYSPROPS;
 import static org.apache.maven.surefire.api.booter.ForkedProcessEventType.BOOTERCODE_TESTSET_COMPLETED;
+import static org.apache.maven.surefire.api.booter.ForkedProcessEventType.BOOTERCODE_ALLTESTSET_COMPLETED;
 import static org.apache.maven.surefire.api.booter.ForkedProcessEventType.BOOTERCODE_TESTSET_STARTING;
 import static org.apache.maven.surefire.api.booter.ForkedProcessEventType.BOOTERCODE_TEST_ASSUMPTIONFAILURE;
 import static org.apache.maven.surefire.api.booter.ForkedProcessEventType.BOOTERCODE_TEST_ERROR;
@@ -133,6 +134,12 @@ public class EventChannelEncoder extends EventEncoder implements MasterProcessCh
     {
         encodeSystemProperties( reportEntry.getSystemProperties(), reportEntry.getRunMode(), reportEntry.getTestRunId() );
         encode( BOOTERCODE_TESTSET_COMPLETED, reportEntry, trimStackTraces, true );
+    }
+
+    @Override
+    public void allTestSetCompleted()
+    {
+        encodeOpcode( BOOTERCODE_ALLTESTSET_COMPLETED , true );
     }
 
     @Override
