@@ -207,7 +207,7 @@ public class KPLifecycleParticipant extends AbstractMavenLifecycleParticipant {
 			if (d.getGroupId().equals("org.testng"))
 				testNG = true;
 		}
-		p.setVersion("3.0.0-M6-SNAPSHOT");
+		p.setVersion("3.0.0-M8-SNAPSHOT");
 //		Dependency d = new Dependency();
 //		d.setArtifactId("kp-test-listener");
 //		d.setGroupId("edu.gmu.swe.smells");
