@@ -69,7 +69,7 @@
                 <configuration>
                     <skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>
                 </configuration>
-                <executions>
+                <!-- <executions>
                     <execution>
                         <id>mojo-descriptor</id>
                         <phase>process-classes</phase>
@@ -83,7 +83,7 @@
                             <goal>helpmojo</goal>
                         </goals>
                     </execution>
-                </executions>
+                </executions> -->
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>

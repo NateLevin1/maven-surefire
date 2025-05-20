@@ -1,0 +1,1 @@
+mvn install -DskipTests -Drat.skip -Denforcer.skip -Dmaven.test.skip=true -Dcheckstyle.skip
